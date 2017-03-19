@@ -134,7 +134,7 @@ setupExtroot()
 	uci set fstab.jffs2.enabled='1'
 	uci commit fstab
 	if [ "${filesystem}" == "btrfs" ]; then
-		mkfs.btrfs -f -M -d dup -m dup -L extroot "${device}"
+		mkfs.btrfs -f -d dup -m dup -L extroot "${device}"
 	        #mount -t btrfs LABEL=extroot /mnt/extroot
 	        log "Finished setting up filesystem"
 	        mount -t btrfs "${device}" /mnt/extroot
@@ -190,7 +190,7 @@ EOF
 		createPartitions "${device}"
 		mkswap -L swap "${device}2"
 		mkfs.ext4  -F -L root "${device}1"
-		mkfs.btrfs -f -M -d dup -m dup -L data "${device}3"
+		mkfs.btrfs -f -d dup -m dup -L data "${device}3"
 		log "Finished setting up filesystem"
 	        mount -t ext4 "${device}1" /mnt/extroot
 	        uci get fstab.diskswap && uci delete fstab.diskswap
