@@ -26,6 +26,8 @@ autoprovisionStage2()
 # */10 * * * * /root/autoprovision-stage3.sh
 0 0 * * * /usr/sbin/logrotate /etc/logrotate.conf
 EOF
+	# Fix default route
+	route add default gw 192.168.1.1
         # logrotate is complaining without this directory
         mkdir -p /var/log/archive
         mkdir -p /var/lib
