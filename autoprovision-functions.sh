@@ -148,8 +148,8 @@ setupExtroot()
 			uci set fstab.overlay.target='/overlay'
 			uci set fstab.overlay.fstype='btrfs'
 			uci set fstab.overlay.device="${device}"
-			local subvolid=$(btrfs subvolume list -t /mnt/extroot | grep overlay | cut -c1-3)
-			uci set fstab.overlay.options='subvolid=/overlay'
+			#local subvolid=$(btrfs subvolume list -t /mnt/extroot | grep overlay | cut -c1-3)
+			uci set fstab.overlay.options='subvol=/overlay'
 			uci set fstab.overlay.enabled='1'
 			uci get fstab.rootfs && uci set fstab.rootfs.enabled='0'
 	    		uci commit fstab 
@@ -167,8 +167,8 @@ EOF
 			uci set fstab.rootfs.target='/'
 			uci set fstab.rootfs.fstype='btrfs'
 			uci set fstab.rootfs.device="${device}"
-			local subvolid=$(btrfs subvolume list -t /mnt/extroot | grep rootfs | cut -c1-3)
-			uci set fstab.rootfs.options='subvolid=/rootfs'
+			#local subvolid=$(btrfs subvolume list -t /mnt/extroot | grep rootfs | cut -c1-3)
+			uci set fstab.rootfs.options='subvol=/rootfs'
 			uci set fstab.rootfs.enabled='1'
 			uci get fstab.overlay && uci set fstab.overlay.enabled='0'
 	    		uci commit fstab 
